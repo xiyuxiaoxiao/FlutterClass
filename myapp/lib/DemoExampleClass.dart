@@ -36,7 +36,7 @@ class DemoExampleClass extends StatelessWidget {
 
   Widget _titleSection() {
     return new Container(
-      decoration:_decoration,
+      decoration: _decoration,
       padding: const EdgeInsets.all(32),
       margin: const EdgeInsets.all(10),
       child: new Row(

@@ -17,23 +17,18 @@ class GridviewClass extends StatelessWidget {
   }
 
   Widget _buildGrid() {
+    // 方式 1
     // return GridView.extent(
     //   maxCrossAxisExtent: 150, // 根据宽度自动规划一行能放几个
 
-    //   padding: new EdgeInsets.all(10),
-    //   mainAxisSpacing: 20,
-    //   crossAxisSpacing: 20,
-    //   childAspectRatio: 1/1.3,
-    //   children: _buildGridList(30),
-    // );
-
+    // 方式 2
     return GridView.count(
       crossAxisCount: 2, // 控制列数
-      
+
       padding: new EdgeInsets.all(10),
       mainAxisSpacing: 20,
       crossAxisSpacing: 20,
-      childAspectRatio: 1/1.3,
+      childAspectRatio: 1 / 1.3,
       children: _buildGridList(30),
     );
   }

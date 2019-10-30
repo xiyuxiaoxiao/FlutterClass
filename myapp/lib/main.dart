@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter/rendering.dart';
 import 'package:myapp/LayoutContainer.dart';
 import 'package:myapp/DemoExampleClass.dart';
 import 'package:myapp/GridViewClass.dart';
+import 'package:myapp/TextFieldClass.dart';
 
 void main() {
   // 可以查看布局结构
@@ -13,7 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return new MaterialApp(
       title: 'Welcome to Flutter',
       // theme: new ThemeData(
@@ -27,6 +28,13 @@ class MyApp extends StatelessWidget {
           child: new RandomWords(),
         ),
       ),
+
+      routes: <String, WidgetBuilder>{
+        'path0': (BuildContext content) => LayoutContainer(title: '基本布局'),
+        'path1': (BuildContext content) => DemoExampleClass(title: 'Demo练习'),
+        'path2': (BuildContext content) => GridviewClass(title: 'GridView'),
+        'path3': (BuildContext content) => TextFieldClass(title: '文本框'),
+      },
     );
   }
 }
@@ -38,34 +46,13 @@ class RandomWords extends StatefulWidget {
 
 class RandomWordsState extends State<RandomWords> {
   @override
-  var _suggestions = [];
+  final _suggestions = ['基本布局', 'Demo练习', 'GridView', '文本框'];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget build(BuildContext context) {
-    final list0 = {
-      'title': '基本布局',
-      'container': (title) {
-        return new LayoutContainer(title: title);
-      } ,
-    };
-    final list1 = {
-      'title': 'Demo练习',
-      'container': (title) => new DemoExampleClass(title: title),
-    };
-    final list2 = {
-      'title': 'GridView',
-      'container': (title) => new GridviewClass(title: title),
-    };
-
-    // final arr = [list0, list1, list2];
-    // for (var obj in arr) {
-    //   _suggestions.add(obj);
-    // }
-    _suggestions = [list0, list1, list2];
-
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Startup Name Generator'),
+        title: new Text('学习'),
       ),
       body: _buildSuggestions(),
     );
@@ -75,7 +62,7 @@ class RandomWordsState extends State<RandomWords> {
     return new ListView.separated(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (BuildContext content, int index) {
-        return _buildRow(_suggestions[index]);
+        return _buildRow(index);
       },
       separatorBuilder: (BuildContext content, int index) {
         return new Divider();
@@ -88,27 +75,30 @@ class RandomWordsState extends State<RandomWords> {
     // );
   }
 
-  Widget _buildRow(final pair) {
+  Widget _buildRow(int index) {
+    String text = _suggestions[index];
     return new ListTile(
       title: new Text(
-        pair['title'],
+        text,
         style: _biggerFont,
       ),
       trailing: new Icon(Icons.arrow_forward_ios),
       onTap: () {
         setState(() {
-          _pushLayoutSubView(pair);
+          _pushLayoutSubView(index);
         });
       },
     );
   }
 
   // 跳转
-  void _pushLayoutSubView(obj) {
-    Navigator.of(context).push(new MaterialPageRoute(
-      builder: (context) {
-        return obj['container'](obj['title']);
-      },
-    ));
+  void _pushLayoutSubView(index) {
+    Navigator.pushNamed(context, 'path${index}');
+
+    // Navigator.of(context).push(new MaterialPageRoute(
+    //   builder: (context) {
+    //     return DemoExampleClass(title: 'Demo练习');
+    //   },
+    // ));
   }
 }

@@ -56,19 +56,29 @@ class _layoutButtonState extends State<LayoutButtonWidget> {
 
   Widget _button() {
     return new Container(
-      decoration: new BoxDecoration(
-          border: new Border.all(
-        color: Colors.black,
-      )),
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          tapView("Expanded填充", 0),
-          tapView("Container", 1),
-          tapView("聚集widgets", 2),
-        ],
-      ),
-    );
+        decoration: new BoxDecoration(
+            border: new Border.all(
+          color: Colors.black,
+        )),
+        child: new Column(
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                tapView("Expanded填充", 0),
+                tapView("Container", 1),
+                tapView("聚集widgets", 2),
+              ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                tapView("Stack重叠", 3),
+                tapView("Card和圆角", 4),
+              ],
+            ),
+          ],
+        ));
   }
 
   Widget _content() {
@@ -80,6 +90,12 @@ class _layoutButtonState extends State<LayoutButtonWidget> {
     }
     if (_selectIndex == 2) {
       return _gatherWidgets();
+    }
+    if (_selectIndex == 3) {
+      return _stackWidget();
+    }
+    if (_selectIndex == 4) {
+      return _cardWidget();
     }
     return null;
   }
@@ -132,9 +148,9 @@ class _layoutButtonState extends State<LayoutButtonWidget> {
       child: view,
     );
   }
-  
+
   Widget _gatherWidgets() {
-    return  new Row(
+    return new Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         new Icon(Icons.star, color: Colors.green[500]),
@@ -143,6 +159,62 @@ class _layoutButtonState extends State<LayoutButtonWidget> {
         new Icon(Icons.star, color: Colors.black),
         new Icon(Icons.star, color: Colors.black),
       ],
+    );
+  }
+
+  // 后面的依次在前面的上面
+  Widget _stackWidget() {
+    var stack = new Stack(
+      alignment: const Alignment(1, 1),
+      children: <Widget>[
+        new Container(
+          width: 200,
+          height: 200,
+          child: new Image.asset(
+            'images/flow/pic0.jpg',
+            fit: BoxFit.fill,
+          ),
+        ),
+        new Container(
+          decoration: new BoxDecoration(color: Colors.green),
+          width: 70,
+          height: 70,
+        ),
+        new Container(
+          decoration: new BoxDecoration(color: Colors.black),
+          padding: new EdgeInsets.all(5),
+          child: new Text(
+            'Mia B',
+            style: new TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white),
+          ),
+        )
+      ],
+    );
+
+    return stack;
+  }
+
+  Widget _cardWidget() {
+    return new SizedBox(
+      width: 200,
+      height: 200,
+      child: new Card(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(14.0))),
+        elevation: 24,
+
+        // 圆角会被遮挡住 因此对card添加包裹设置内边距  下面的ClipRRect 可以处理超出的内容
+        child: new Container(
+          padding: new EdgeInsets.all(20),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: new Container(
+              color: Colors.green,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
