@@ -24,6 +24,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
+  http: ^0.12.0+2
+  dio: ^3.0.4
+  wyj_test_plugin:
+    path: ../flutter_packages_wyj/wyj_test_plugin/
 
 dev_dependencies:
   flutter_test:

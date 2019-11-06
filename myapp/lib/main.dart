@@ -5,6 +5,7 @@ import 'package:myapp/LayoutContainer.dart';
 import 'package:myapp/DemoExampleClass.dart';
 import 'package:myapp/GridViewClass.dart';
 import 'package:myapp/MaterialInteractionClass.dart';
+import 'package:myapp/PlatformChannel.dart';
 import 'package:myapp/TextFieldClass.dart';
 
 void main() {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         'path2': (BuildContext content) => GridviewClass(title: 'GridView'),
         'path3': (BuildContext content) => TextFieldClass(title: '文本框'),
         'path4': (BuildContext content) => MaterialInteractionClass(title: 'Material组件交互'),
+        'path5': (BuildContext content) => PlatformChannel(title: '构建通道'),
       },
     );
   }
@@ -49,7 +51,7 @@ class RandomWords extends StatefulWidget {
 class RandomWordsState extends State<RandomWords> {
   @override
   final _suggestions = [
-    '基本布局', 'Demo练习', 'GridView', '文本框', 'Material组件交互',
+    '基本布局', 'Demo练习', 'GridView', '文本框', 'Material组件交互', '构建通道'
   ];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
