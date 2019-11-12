@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 class WyjTestPlugin {
   static const MethodChannel _channel = const MethodChannel('wyj_test_plugin');
@@ -23,5 +24,10 @@ class WyjTestPlugin {
     var params = {'number': n};
     Future<int> result = _channel.invokeMethod('numberParams', params);
     return result;
+  }
+
+
+  static Future pluginHomeVC() async {
+    await _channel.invokeMethod('pluginHomeVC');
   }
 }

@@ -35,8 +35,42 @@
         int n = number.intValue + 10;
         result(@(n));
     }
+    else if ([@"pluginHomeVC" isEqualToString:call.method]) {
+        UIViewController *vc = [[NSClassFromString(@"PluginHomeVC") alloc] init];
+        
+        UIView *view = [[UIView alloc] init];
+        view.frame = CGRectMake(100, 60, 100, 200);
+        view.backgroundColor = [UIColor orangeColor];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[self getCurrentVC] presentViewController:vc animated:YES completion:nil];
+        });
+    }
     else {
         result(FlutterMethodNotImplemented);
     }
+}
+
+- (UIViewController *)getCurrentVC {
+    UIViewController *result = nil;
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal) {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows) {
+            if (tmpWin.windowLevel == UIWindowLevelNormal) {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    if ([nextResponder isKindOfClass:[UIViewController class]]) {
+        result = nextResponder;
+    } else {
+        result = window.rootViewController;
+    }
+    return result;
 }
 @end
