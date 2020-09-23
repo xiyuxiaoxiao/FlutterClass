@@ -28,6 +28,8 @@ dependencies:
   dio: ^3.0.4
   wyj_test_plugin:
     path: ../flutter_packages_wyj/wyj_test_plugin/
+  
+  flutter_webview_plugin: ^0.3.5
 
 dev_dependencies:
   flutter_test:

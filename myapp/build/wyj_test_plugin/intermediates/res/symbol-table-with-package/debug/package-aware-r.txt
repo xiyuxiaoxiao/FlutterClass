@@ -1,0 +1,1 @@
+com.wyj.wyj_test_plugin

@@ -1,0 +1,11 @@
+framework module wyj_test_plugin {
+  umbrella header "wyj_test_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module wyj_test_plugin.Swift {
+    header "wyj_test_plugin-Swift.h"
+    requires objc
+}
